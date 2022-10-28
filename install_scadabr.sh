@@ -53,5 +53,9 @@ echo -e " - Copying ScadaBR"
 sudo cp ${CURRENT_FOLDER}/ScadaBR.war /opt/tomcat6/apache-tomcat-6.0.53/webapps/
 echo -e " - Changing Tomcat port to 9090"
 sudo cp ${CURRENT_FOLDER}/server.xml /opt/tomcat6/apache-tomcat-6.0.53/conf/
+echo -e "Updating ScadaBR"
+./update_scadabr.sh
+echo -e "Add cronjob on startup"
+(crontab -l 2>/dev/null; echo '@reboot /opt/tomcat6/apache-tomcat-6.0.53/bin/startup.sh' | crontab -u $1 - # need to specify User
 echo -e " - Starting Tomcat6: /opt/tomcat6/apache-tomcat-6.0.53/bin/startup.sh"
 sudo /opt/tomcat6/apache-tomcat-6.0.53/bin/startup.sh
